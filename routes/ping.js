@@ -3,37 +3,36 @@
  */
 var express = require('express');
 var router = express.Router();
+var res_data = "pong";
+
 router.route('/ping')
-    .get(function(req,res){
-        var response = {
-            'request_method': "GET",
-            'response_code' : 200,
-            'response_data' : "pong"
-        };
-        res.json(response);
+    .get(function(req, res){
+      res.status(200).json({
+        req_method : req.method,
+        code : 200,
+        data : res_data
+      });
     })
-    .post(function(req,res){
-        var response = {
-            'request_method': "POST",
-            'response_code' : 200,
-            'response_data' : "pong"
-        };
-        res.json(response);
+    .post(function(req, res){
+      res.status(200).json({
+        req_method : req.method,
+        code : 200,
+        data : res_data
+      });
     })
-    .put(function(req,res){
-        var response = {
-            'request_method': "PUT",
-            'response_code' : 200,
-            'response_data' : "pong"
-        };
-        res.json(response);
+    .put(function(req, res){
+      res.status(200).json({
+        req_method : req.method,
+        code : 200,
+        data : res_data
+      });
     })
-    .delete(function(req,res){
-        var response = {
-            'request_method': "DELETE",
-            'response_code' : 200,
-            'response_data' : "pong"
-        };
-        res.json(response);
+    .delete(function(req, res){
+      res.status(200).json({
+        req_method : req.method,
+        code : 200,
+        data : res_data
+      });
     })
+
 module.exports = router;

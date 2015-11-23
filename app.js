@@ -35,6 +35,7 @@ app.use('/api', ping);
 
 app.use('/auth/flogin', flogin);
 app.use('/auth/facebook', facebookLogin);
+app.use('/auth/facebook/callback',facebookLogin);
 app.use('/auth/facebook/login_success', facebookLogin);
 app.use('/auth/facebook/login_fail', facebookLogin);
 

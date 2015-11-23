@@ -28,6 +28,7 @@ passport.use(new FacebookStrategy({
   clientID: configAuth.facebookAuth.clientID,
   clientSecret: configAuth.facebookAuth.clientSecret,
   callbackURL: configAuth.facebookAuth.callbackURL,
+  profileFields: ['id','displayName','emails','name']
   },
   function(accessToken, refreshToken, profile, done) {
     done(null, profile);
@@ -35,7 +36,7 @@ passport.use(new FacebookStrategy({
 ));
 
 router.get('/',
-  passport.authenticate('facebook', { scope: ['public_profile', 'email'] })
+  passport.authenticate('facebook', { scope: ['public_profile', 'email']})
 );
 
 router.get('/callback',

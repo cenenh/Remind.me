@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  head 
+    h1= title
+  body
+    p Welcome to #{title}
+    p facebook-login
+    
+    script(type='text/javascript').
+      window.fbAsyncInit = function() {
+      FB.init({
+          appId      : '698775146890408',
+          xfbml      : true,
+          version    : 'v2.5'
+        });
+      };
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) 
+        {
+          return;
+        }
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    
+    .fb-like(data-share='true', data-width='450', data-show-faces='true')
+    
+    div
+      button(onclick="location.href='/auth/facebook'") Facebook login

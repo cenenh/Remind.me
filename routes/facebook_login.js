@@ -25,9 +25,9 @@ passport.deserializeUser(function(user, done) {
 });
 
 passport.use(new FacebookStrategy({
-  clientID: configAuth.googleAuth.clientID,
-  clientSecret: configAuth.googleAuth.clientSecret,
-  callbackURL: configAuth.googleAuth.callbackURL,
+  clientID: configAuth.facebookAuth.clientID,
+  clientSecret: configAuth.facebookAuth.clientSecret,
+  callbackURL: configAuth.facebookAuth.callbackURL,
   },
   function(accessToken, refreshToken, profile, done) {
     done(null, profile);

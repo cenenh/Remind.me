@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 //for auth
 var flogin = require('./routes/fb_login_jade');
 var facebookLogin = require('./routes/facebook_login');
-
+var facebookLoginWithOauth2 = require('./routes/facebook_oauth2_login');
 //for REST API
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -38,7 +38,7 @@ app.use('/auth/facebook', facebookLogin);
 app.use('/auth/facebook/callback',facebookLogin);
 app.use('/auth/facebook/login_success', facebookLogin);
 app.use('/auth/facebook/login_fail', facebookLogin);
-
+app.use('/auth/facebook2/token', facebookLoginWithOauth2);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

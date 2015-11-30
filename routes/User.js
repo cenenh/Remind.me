@@ -7,5 +7,7 @@ var router = express.Router();
 
 router.get('/', User.getAll);
 router.put('/', User.addUser);
+//router.put('/facebook', User...);
+//router.put('/google', User...);
 
 module.exports = router;

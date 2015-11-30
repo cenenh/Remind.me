@@ -41,7 +41,3 @@ module.exports.addUser = function(req, res){
     res.json(response);
   });
 };
-
-module.exports.addUserFromFacebook = function(req, res){
-
-};

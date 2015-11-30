@@ -7,9 +7,11 @@ var bodyParser = require('body-parser');
 
 //for auth
 var flogin = require('./routes/fb_login_jade');
-var facebookLogin = require('./routes/facebook_login');
-var facebookLoginWithOauth2 = require('./routes/facebook_oauth2_login');
+var facebook_web_login = require('./routes/facebook_web_login');
+var facebook_login = require('./routes/facebook_login');
+
 //for REST API
+var user = require('./routes/User');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var ping = require('./routes/ping');
@@ -33,12 +35,16 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/api', ping);
 
+app.use('/user', user);
+
 app.use('/auth/flogin', flogin);
-app.use('/auth/facebook', facebookLogin);
-app.use('/auth/facebook/callback',facebookLogin);
-app.use('/auth/facebook/login_success', facebookLogin);
-app.use('/auth/facebook/login_fail', facebookLogin);
-app.use('/auth/facebook2/token', facebookLoginWithOauth2);
+
+app.use('/auth/facebook_web', facebook_web_login);
+app.use('/auth/facebook_web/callback',facebook_web_login);
+app.use('/auth/facebook_web/login_success', facebook_web_login);
+app.use('/auth/facebook_web/login_fail', facebook_web_login);
+
+app.use('/auth/facebook_login/token', facebook_login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

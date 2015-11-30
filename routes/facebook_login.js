@@ -3,7 +3,7 @@ var session = require('express-session');
 var passport = require('passport');
 var FacebookTokenStrategy = require('passport-facebook-token');
 var configAuth = require('../config/auth');
-var User = require('../app/Controller/User');
+var User = require('../app/Model/User');
 var router = express.Router();
 
 router.use(session({
@@ -29,26 +29,20 @@ passport.use(new FacebookTokenStrategy({
   }
 ));
 
-router.put('/', passport.authenticate('facebook-token',{
-  successRedirect : '/auth/facebook_login/token/success',
-  failureRedirect : '/auth/facebook_login/token/fail',
-  failureFlash : 'invalid-token'
-}));
-
-//router.put('/success', User.addUser);
-
-router.put('/success', function(req, res){
-  res.json({
-    code : 200,
-    data : req.user
-  });
-});
-
-router.put('/fail', function(req, res){
-  res.json({
-    code : 401,
-    data : "Invalid Token"
-  });
+router.put('/', function(req, res){
+	passport.authenticate('facebook-token', function(err, user, info){
+		if(err || !user){
+			res.json({
+				code : 401,
+				data : 'Invalid Access Token'
+			});
+		}
+		else{
+			console.log(user);
+			//console.log(user);
+			res.send(user);
+		}	
+	})(req, res);
 });
 
 router.post('/', passport.authenticate('facebook-token'), function(req, res){

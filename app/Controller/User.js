@@ -40,4 +40,5 @@ module.exports.addUser = function(req, res){
     }
     res.json(response);
   });
+  delete newUser;
 };

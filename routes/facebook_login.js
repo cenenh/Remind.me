@@ -29,10 +29,26 @@ passport.use(new FacebookTokenStrategy({
   }
 ));
 
-router.put('/', passport.authenticate('facebook-token',{
+router.put('/', passport.authenticate('facebook-token'), function(err, user, info){
+  if(err){
+    console.log(err);
+    res.json({
+      err : err
+    });
+  }
+  else{
+    res.json({
+      code : 200,
+      data : "good!"
+    });
+  }
+
+})(req,res);
+
+/*router.put('/', passport.authenticate('facebook-token',{
   successRedirect : '/auth/facebook_login/token/success',
-  failureRedirect : '/auth/facebook_login/token/fail',
-}));
+  failureRedirect : '/auth/facebook_login/token/fail'
+}));*/
 
 //router.put('/success', User.addUser);
 

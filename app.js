@@ -31,20 +31,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//basic routes
 app.use('/', routes);
 app.use('/users', users);
-app.use('/api', ping);
 
+//for REST API
+app.use('/api', ping);
 app.use('/user', user);
 
+//for facebook-login using web
 app.use('/auth/flogin', flogin);
-
 app.use('/auth/facebook_web', facebook_web_login);
-app.use('/auth/facebook_web/callback',facebook_web_login);
+app.use('/auth/facebook_web/*',facebook_web_login);
+/*app.use('/auth/facebook_web/callback',facebook_web_login);
 app.use('/auth/facebook_web/login_success', facebook_web_login);
-app.use('/auth/facebook_web/login_fail', facebook_web_login);
+app.use('/auth/facebook_web/login_fail', facebook_web_login);*/
 
+//for facebook-login using android
 app.use('/auth/facebook_login/token', facebook_login);
+app.use('/auth/facebook_login/token/*', facebook_login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

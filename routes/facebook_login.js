@@ -30,8 +30,8 @@ passport.use(new FacebookTokenStrategy({
 ));
 
 router.put('/', passport.authenticate('facebook-token',{
-  successRedirect : '/success',
-  failureRedirect : '/fail',
+  successRedirect : '/auth/facebook_login/success',
+  failureRedirect : '/auth/facebook_login/fail',
 }));
 
 //router.put('/success', User.addUser);

@@ -42,7 +42,7 @@ app.use('/user', user);
 //for facebook-login using web
 app.use('/auth/flogin', flogin);
 app.use('/auth/facebook_web', facebook_web_login);
-app.use('/auth/facebook_web/callback',facebook_web_login);
+app.use('/auth/facebook_web/callback', facebook_web_login);
 app.use('/auth/facebook_web/login_success', facebook_web_login);
 app.use('/auth/facebook_web/login_fail', facebook_web_login);
 

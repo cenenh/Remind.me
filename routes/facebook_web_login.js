@@ -41,8 +41,8 @@ router.get('/',
 
 router.get('/callback',
   passport.authenticate('facebook', {
-    successRedirect: '/auth/facebook/login_success',
-    failureRedirect: '/auth/facebook/login_fail'
+    successRedirect: '/auth/facebook_web/login_success',
+    failureRedirect: '/auth/facebook_web/login_fail'
   }
 ));
 
@@ -50,6 +50,12 @@ router.get('/login_success', ensureAuthenticated, function(req, res){
   console.log(req.user._json.id);
   console.log(req.user._json.name);
   res.send(req.user);
+});
+
+router.get('/login_fail', ensureAuthenticated, function(req, res){
+  //console.log(req.user._json.id);
+  //console.log(req.user._json.name);
+  res.send("error! something go wrong!");
 });
 
 function ensureAuthenticated(req, res, next) {

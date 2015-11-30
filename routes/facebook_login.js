@@ -32,8 +32,8 @@ passport.use(new FacebookTokenStrategy({
 router.put('/', passport.authenticate('facebook-token',{
   successRedirect : '/auth/facebook_login/token/success',
   failureRedirect : '/auth/facebook_login/token/fail',
-  failureFlash : true
-}, { failureFlash: 'Invalid username or password.' }));
+  failureFlash : 'invalid-token'
+}));
 
 //router.put('/success', User.addUser);
 

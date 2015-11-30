@@ -42,8 +42,7 @@ router.put('/', passport.authenticate('facebook-token'), function(err, user, inf
       data : "good!"
     });
   }
-
-})(req,res);
+});
 
 /*router.put('/', passport.authenticate('facebook-token',{
   successRedirect : '/auth/facebook_login/token/success',

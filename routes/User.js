@@ -7,14 +7,6 @@ var router = express.Router();
 
 router.get('/', User.getAll);
 router.post('/', User.addUser);
-router.post('/:user', function(req, res){
-	var data = req.params;
-	data.user = JSON.parse(data.user);
-
-	console.log(req.params.user);
-	console.log(data);
-
-	res.send(req.params.user);
-});
+router.post('/:user', User.addUser);
 
 module.exports = router;

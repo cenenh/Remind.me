@@ -6,8 +6,15 @@ var User = require('../app/Controller/User');
 var router = express.Router();
 
 router.get('/', User.getAll);
-router.put('/', User.addUser);
-//router.put('/facebook', User...);
-//router.put('/google', User...);
+router.post('/', User.addUser);
+router.post('/:user', function(req, res){
+	var data = req.params;
+	data.user = JSON.parse(data.user);
+
+	console.log(req.params.user);
+	console.log(data);
+
+	res.send(req.params.user);
+});
 
 module.exports = router;

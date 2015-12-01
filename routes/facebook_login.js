@@ -29,7 +29,7 @@ passport.use(new FacebookTokenStrategy({
   }
 ));
 
-router.put('/', function(req, res){
+router.post('/', function(req, res){
 	passport.authenticate('facebook-token', function(err, user, info){
 		if(err || !user){
 			res.json({
@@ -37,24 +37,11 @@ router.put('/', function(req, res){
 				data : 'Invalid Access Token'
 			});
 		}
-		else{
-			console.log(user);
-			//console.log(user);
-			res.send(user);
+		else{ //issue : send invalid token when the error occurs in this else part...
+			user = JSON.stringify(user);
+			res.redirect(307, '/user/'+encodeURIComponent(user));
 		}	
 	})(req, res);
-});
-
-router.post('/', passport.authenticate('facebook-token'), function(req, res){
-	//console.log("POST!");
-	res.status(200);
-	res.json(req.user);
-});
-
-router.get('/:access_token', passport.authenticate('facebook-token'), function(req, res){
-	//console.log(req);
-	console.log(profile);
-	res.send("hi!");
 });
 
 module.exports = router;

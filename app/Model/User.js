@@ -37,6 +37,61 @@ User.prototype.getAll = function(callback) {
   });
 };
 
+User.prototype.getUserById = function(email, callback){
+  console.log("getUserById() in model.user.js");
+  console.log("parameter : " + email);
+  async.waterfall([
+    function(callback){
+      console.log("get database connection in Model.User.getUserById!")
+      connection.getConnection(function(err, connection){
+        callback(null, connection);
+      });
+    },
+    function(connection, callback){
+      connection.query("SELECT * FROM user WHERE email = ?", [email], function(query_error, query_result){
+        console.log("release connection!")
+        connection.release();
+        if(query_error){
+          console.log("query error : " + query_error);
+        }
+        console.log(query_result);
+        callback(JSON.parse(JSON.stringify(query_error)), query_result);
+      });
+    }
+  ],
+  function(async_waterfall_error, getUserById_result){
+    callback(async_waterfall_error, getUserById_result);
+  });
+};
+
+User.prototype.getUserForLogin = function(user, callback){
+  console.log("getUserForLogin() in model.user.js");
+  console.log("parameter : " + user);
+
+  async.waterfall([
+    function(callback){
+      console.log("get database connection in Model.User.getUserForLogin!")
+      connection.getConnection(function(err, connection){
+        callback(null, connection);
+      });
+    },
+    function(connection, callback){
+      connection.query("SELECT * FROM user WHERE email = ? and password = ?", [user.email, user.password], function(query_error, query_result){
+        console.log("release connection!")
+        connection.release();
+        if(query_error){
+          console.log("query error : " + query_error);
+        }
+        console.log(query_result);
+        callback(JSON.parse(JSON.stringify(query_error)), query_result);
+      });
+    }
+  ],
+  function(async_waterfall_error, getUserById_result){
+    callback(async_waterfall_error, getUserById_result);
+  });
+};
+
 User.prototype.addUser = function(newUser, callback){
   console.log('it is addUser() in model.user.js');
   console.log("parameter : " + JSON.stringify(newUser));

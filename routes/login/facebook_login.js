@@ -3,7 +3,7 @@ var session = require('express-session');
 var passport = require('passport');
 var FacebookTokenStrategy = require('passport-facebook-token');
 var configAuth = require('../config/auth');
-var User = require('../app/Controller/User');
+var User = require('../app/Model/User');
 var router = express.Router();
 
 router.use(session({
@@ -29,37 +29,20 @@ passport.use(new FacebookTokenStrategy({
   }
 ));
 
-router.put('/', passport.authenticate('facebook-token',{
-  successRedirect : '/auth/facebook_login/token/success',
-  failureRedirect : '/auth/facebook_login/token/fail',
-}));
-
-//router.put('/success', User.addUser);
-
-router.put('/success', function(req, res){
-  res.json({
-    code : 200,
-    data : req.user
-  });
-});
-
-router.put('/fail', function(req, res){
-  res.json({
-    code : 401,
-    data : "Invalid Token"
-  });
-});
-
-router.post('/', passport.authenticate('facebook-token'), function(req, res){
-	//console.log("POST!");
-	res.status(200);
-	res.json(req.user);
-});
-
-router.get('/:access_token', passport.authenticate('facebook-token'), function(req, res){
-	//console.log(req);
-	console.log(profile);
-	res.send("hi!");
+router.post('/', function(req, res){
+	passport.authenticate('facebook-token', function(err, user, info){
+		if(err || !user){
+			res.json({
+				code : 401,
+				data : 'Invalid Access Token'
+			});
+		}
+		else{ //issue : send invalid token when the error occurs in this else part...
+			user = JSON.stringify(user);
+      //status code 307 -> redirect to POST method.
+			res.redirect(307, '/user/'+encodeURIComponent(user));
+		}
+	})(req, res);
 });
 
 module.exports = router;

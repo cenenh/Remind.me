@@ -1,9 +1,9 @@
 var express = require('express');
 var session = require('express-session');
 var passport = require('passport');
-var FacebookTokenStrategy = require('passport-facebook-token');
-var configAuth = require('../config/auth');
-var User = require('../app/Model/User');
+var GoogleTokenStrategy = require('passport-google-token').Strategy;
+var configAuth = require('../../config/auth');
+var User = require('../../app/Model/User');
 var router = express.Router();
 
 router.use(session({
@@ -15,22 +15,19 @@ router.use(session({
 router.use(passport.initialize());
 router.use(passport.session());
 
-passport.use(new FacebookTokenStrategy({
-  clientID: configAuth.facebookAuth.clientID,
-  clientSecret: configAuth.facebookAuth.clientSecret
+passport.use(new GoogleTokenStrategy({
+    clientID: configAuth.googleAuth.clientID,
+    clientSecret: configAuth.googleAuth.clientSecret
   },
   function(accessToken, refreshToken, profile, done) {
-    var user = {
-      email : profile.emails[0].value,
-      name : profile.name.familyName + profile.name.givenName,
-      password : profile.id
-    }
-    done(null, user);
+    console.log(profile);
+    done(null, profile);
   }
 ));
 
 router.post('/', function(req, res){
-	passport.authenticate('facebook-token', function(err, user, info){
+  console.log("google login is called!");
+	passport.authenticate('google-token', function(err, user, info){
 		if(err || !user){
 			res.json({
 				code : 401,
@@ -40,7 +37,8 @@ router.post('/', function(req, res){
 		else{ //issue : send invalid token when the error occurs in this else part...
 			user = JSON.stringify(user);
       //status code 307 -> redirect to POST method.
-			res.redirect(307, '/user/'+encodeURIComponent(user));
+			//res.redirect(307, '/user/'+encodeURIComponent(user));
+      res.send(user);
 		}
 	})(req, res);
 });

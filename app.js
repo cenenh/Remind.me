@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var flogin = require('./routes/fb_login_jade');
 var facebook_web_login = require('./routes/facebook_web_login');
 var facebook_login = require('./routes/facebook_login');
+var google_login = require('./routes/login/google_login');
 
 //for REST API
 var user = require('./routes/User');
@@ -46,10 +47,13 @@ app.use('/auth/facebook_web/callback', facebook_web_login);
 app.use('/auth/facebook_web/login_success', facebook_web_login);
 app.use('/auth/facebook_web/login_fail', facebook_web_login);
 
-//for facebook-login using android
+
+//for Facebook-login using Android
 app.use('/auth/facebook_login/token', facebook_login);
-app.use('/auth/facebook_login/token/success', facebook_login);
-app.use('/auth/facebook_login/token/fail', facebook_login);
+
+//for Google-login using Android
+app.use('/auth/google_login/token', google_login);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

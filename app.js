@@ -17,6 +17,9 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var ping = require('./routes/ping');
 
+//for TEST API
+var test_api = require('./routes/test_api');
+
 var app = express();
 
 // view engine setup
@@ -54,6 +57,8 @@ app.use('/auth/facebook_login/token', facebook_login);
 //for Google-login using Android
 app.use('/auth/google_login/token', google_login);
 
+//for test_api
+app.use('/testapi', test_api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

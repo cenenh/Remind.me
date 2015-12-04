@@ -7,7 +7,7 @@ var router = express.Router();
 
 //localhost:8080/user
 router.get('/all', User.getAll);
-router.post('/', User.addUser);
+router.post('/auth/signup', User.addUser);
 
 //for Facebook & Google login
 router.post('/:user', User.addUser);

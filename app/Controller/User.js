@@ -37,7 +37,7 @@ module.exports.getUserForLogin = function(req, res){
       function(response, callback){
         if(response.code === 200){
           jwt.sign(result[0], jwt_config.secret, {}, function(done){
-            //3rd parameter, options 필수
+            //3rd parameter, options 필수, option 없어도 {} 필수
             response.token = done;
             callback(null, response);
           });

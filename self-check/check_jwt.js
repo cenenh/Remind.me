@@ -16,3 +16,5 @@ jwt.verify(token, jwt_config.secret, {}, function(err, decoded){
   console.log(decoded);
   console.log(decoded.email);
 });
+
+console.log(jwt_config.options);

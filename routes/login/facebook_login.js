@@ -34,7 +34,7 @@ router.post('/', function(req, res){
 		if(err || !user){
 			res.json({
 				code : 401,
-				data : 'Invalid Access Token'
+				data : 'Invalid_Facebook_Access_Token'
 			});
 		}
 		else{ //issue : send invalid token when the error occurs in this else part...

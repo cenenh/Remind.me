@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 //for auth
 var flogin = require('./routes/fb_login_jade');
 var facebook_web_login = require('./routes/facebook_web_login');
-var facebook_login = require('./routes/facebook_login');
+var facebook_login = require('./routes/login/facebook_login');
 var google_login = require('./routes/login/google_login');
 
 //for REST API

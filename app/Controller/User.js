@@ -4,6 +4,7 @@ var async = require('async');
 var jwt_config = require('../../config/jwt');
 var jwt = require('jsonwebtoken');
 
+//for login
 module.exports.getUserForLogin = function(req, res){
   console.log("request method : " + req.method);
   console.log("user.getUserForLogin() is called!");
@@ -35,7 +36,7 @@ module.exports.getUserForLogin = function(req, res){
       },
       function(response, callback){
         if(response.code === 200){
-          jwt.sign(result[0], jwt_config.secret, { expiresInMinutes: 1440 }, function(done){
+          jwt.sign(result[0], jwt_config.secret, jwt_config.options, function(done){
             //3rd parameter, options 필수
             response.token = done;
             callback(null, response);
@@ -99,18 +100,19 @@ module.exports.addUser = function(req, res){
 
   var response = {};
   var newUser = new User();
+  var access_token = false; //state var
 
   if(_.isEmpty(req.params)){ //sign-up using email
     newUser.name = req.body.name;
   	newUser.password = req.body.password;
   	newUser.email = req.body.email;
-  	console.log(newUser);
   }
   else{	//sign-up using Facebook or Google
     var req_data = JSON.parse(req.params.user);
   	newUser.name = req_data.name;
   	newUser.password = req_data.password;
   	newUser.email = req_data.email;
+    access_token = true;
   }
 
   newUser.addUser(newUser, function(error, result){
@@ -125,7 +127,16 @@ module.exports.addUser = function(req, res){
       response.code = 200;
       response.data = "addUser OK";
     }
-    res.json(response);
+
+    if(access_token){ // google & facebook은 토큰을 주어야함..
+      jwt.sign(newUser, jwt_config.secret, jwt_config.options, function(token){
+        response.access_token = token;
+        res.json(response);
+      });
+    }
+    else{
+      res.json(response);
+    }
     delete newUser;
   });
 };

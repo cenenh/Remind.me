@@ -19,11 +19,11 @@ Request:
 Response: 
       Response Type: JSON
       Response Data: //Only return 200 or 400 
-        1) { "code": int, "data": String } // if success
-        2) { "code": int, "data": String, "reason": String } // if error
+            1) { "code": int, "data": String } // if success
+            2) { "code": int, "data": String, "reason": String } // if error
       Response Data Example: 
-        1) { "code": 200, "data": "addUser OK" }
-        2) { "code": 400, "data": "addUser Fail", "reason": "duplicate-mail" }
+            1) { "code": 200, "data": "addUser OK" }
+            2) { "code": 400, "data": "addUser Fail", "reason": "duplicate-mail" }
 ```
 
 #### Sign-up using Facebook
@@ -37,5 +37,12 @@ Request:
 Response:
       Response Type: JSON
       Response Data: //Only return 200 or 400 or 401
-        
+            1) { "code": int, "data": String, "access_token": String} // if success
+            2) { "code": int, "data": String } // if facebook_access_token_error
+            3) { "code": int, "data": String, "reason": String } // if server_error
+      Response Data Example: 
+            1) { "code": 200, "data": "addUser OK", "access_token": "Server가 제공하는 JsonWebToken" } // if success
+            2) { "code": 401, "data": "Invalid_Facebook_Access_Token" } // if facebook_access_token_error
+            3) { "code": 400, "data": "addUser Fail", "reason": "duplicate-mail" } // if server_error
+            
 ```

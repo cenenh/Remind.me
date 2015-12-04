@@ -21,8 +21,8 @@ router.use('/', function(req, res, next){
             data : 'JsonWebTokenError'
           });
         }
-      }
-      else{
+      } //verify error
+      else{ // No error
         next();
       }
     });

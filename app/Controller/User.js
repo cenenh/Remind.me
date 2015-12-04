@@ -36,7 +36,7 @@ module.exports.getUserForLogin = function(req, res){
       },
       function(response, callback){
         if(response.code === 200){
-          jwt.sign(result[0], jwt_config.secret, jwt_config.options, function(done){
+          jwt.sign(result[0], jwt_config.secret, {}, function(done){
             //3rd parameter, options 필수
             response.token = done;
             callback(null, response);
@@ -129,7 +129,8 @@ module.exports.addUser = function(req, res){
     }
 
     if(access_token){ // google & facebook은 토큰을 주어야함..
-      jwt.sign(newUser, jwt_config.secret, jwt_config.options, function(token){
+      console.log(newUser);
+      jwt.sign(newUser, jwt_config.secret, {}, function(token){
         response.access_token = token;
         res.json(response);
       });
@@ -137,6 +138,5 @@ module.exports.addUser = function(req, res){
     else{
       res.json(response);
     }
-    delete newUser;
   });
 };

@@ -2,8 +2,8 @@ var express = require('express');
 var session = require('express-session');
 var passport = require('passport');
 var FacebookTokenStrategy = require('passport-facebook-token');
-var configAuth = require('../config/auth');
-var User = require('../app/Model/User');
+var configAuth = require('../../config/auth');
+var User = require('../../app/Model/User');
 var router = express.Router();
 
 router.use(session({

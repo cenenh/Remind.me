@@ -36,7 +36,27 @@ router.use('/', function(req, res, next){
   }
 });
 
-router.post('/', function(req, res, next){
+router.use('/header', function(req, res, next){
+  console.log(req.headers.authorization);
+  next();
+});
+
+router.post('/header', function(req, res){
+  res.json({
+    code : 200,
+    data : 'OK'
+  });
+});
+
+router.get('/header', function(req, res){
+  res.json({
+    code : 200,
+    data : 'OK'
+  });
+});
+
+
+router.post('/', function(req, res){
   res.json({
     code : 200,
     data : "OK"

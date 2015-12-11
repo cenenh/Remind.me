@@ -1,46 +1,49 @@
 var express = require('express');
-var session = require('express-session');
-var passport = require('passport');
-var GoogleTokenStrategy = require('passport-google-token').Strategy;
-var configAuth = require('../../config/auth');
 var User = require('../../app/Model/User');
 var router = express.Router();
+var request = require('request');
+var google_api_url = "https://www.googleapis.com/oauth2/v3/tokeninfo";
 
-router.use(session({
-  secret: 'remind.me',
-  resave: false,
-  saveUninitialized: false
-}));
-
-router.use(passport.initialize());
-router.use(passport.session());
-
-passport.use(new GoogleTokenStrategy({
-    clientID: configAuth.googleAuth.clientID,
-    clientSecret: configAuth.googleAuth.clientSecret
-  },
-  function(accessToken, refreshToken, profile, done) {
-    console.log(profile);
-    done(null, profile);
-  }
-));
+//localhost:8888/auth/google_login/token
 
 router.post('/', function(req, res){
-  console.log("google login is called!");
-	passport.authenticate('google-token', function(err, user, info){
-		if(err || !user){
-			res.json({
-				code : 401,
-				data : 'Invalid Access Token'
-			});
-		}
-		else{ //issue : send invalid token when the error occurs in this else part...
-			user = JSON.stringify(user);
-      //status code 307 -> redirect to POST method.
-			//res.redirect(307, '/user/'+encodeURIComponent(user));
-      res.send(user);
-		}
-	})(req, res);
+
+  var params = {
+    id_token: req.body.access_token
+  };
+  request({url:google_api_url, qs:params}, function(err, response, body){
+    if(err){
+      res.json({
+        code: 500,
+        data: "SERVER ERROR"
+      });
+    } //if err
+    else{
+      if(response.statusCode === 400){
+        res.json({
+          code : 401,
+          data : "invalid token"
+        });
+      } //if res.code === 400
+      //success!
+      else if(response.statusCode === 200){
+        var result = JSON.parse(body);
+        var user = {
+          email: result.email,
+          name : result.name,
+          password: result.sub, //user_id in google
+        };
+        user = JSON.stringify(user);
+        res.redirect(307, '/user/'+encodeURIComponent(user));
+      } //if res.code === 200
+      else{
+        res.json({
+          code: 999,
+          data: "Unknown-err"
+        });
+      } // if res.code !== 200 || res.code !== 400
+    } //else, if not err
+  });
 });
 
 module.exports = router;

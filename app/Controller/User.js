@@ -128,7 +128,7 @@ module.exports.addUser = function(req, res){
       response.data = "addUser OK";
     }
 
-    if(access_token){ // google & facebook은 토큰을 주어야함..
+    if(access_token && response.code === 200){ // google & facebook은 토큰을 주어야함..
       console.log(newUser);
       jwt.sign(newUser, jwt_config.secret, {}, function(token){
         response.access_token = token;

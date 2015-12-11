@@ -19,12 +19,16 @@
     "jsonwebtoken": "^5.4.1",
     "moment": "^2.10.6",
     "morgan": "~1.6.1",
+    "multer": "^1.1.0",
     "mysql": "^2.9.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.0.0",
     "passport-facebook-token": "~3.0.5",
     "passport-google-authcode": "^0.1.1",
+    "passport-google-id-token": "^0.3.1",
+    "passport-google-plus-token": "^2.0.1",
     "passport-google-token": "^0.1.2",
+    "request": "^2.67.0",
     "serve-favicon": "~2.3.0",
     "underscore": "^1.8.3"
   }

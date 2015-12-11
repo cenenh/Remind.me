@@ -106,9 +106,9 @@ User.prototype.addUser = function(newUser, callback){
       connection.query('INSERT INTO user SET ?', newUser, function(query_error, query_result){
         console.log("release connection!")
         connection.release();
-		if(query_error){
-			console.log("query error : " + query_error);
-		}
+    		if(query_error){
+    			console.log("query error : " + query_error);
+    		}
         callback(JSON.parse(JSON.stringify(query_error)), query_result);
       }); //connection.query();
     }

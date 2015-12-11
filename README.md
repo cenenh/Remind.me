@@ -38,11 +38,11 @@ Response:
       Response Type: JSON
       Response Data: //Only return 200 or 400 or 401
          1) { "code": int, "data": String, "access_token": String} // if success
-         * access_token은 항상 가지고 있어야 합니다.      
          2) { "code": int, "data": String } // if facebook_access_token_error
          3) { "code": int, "data": String, "reason": String } // if server_error
       Response Data Example: 
          1) { "code": 200, "data": "addUser OK", "access_token": "Server가 제공하는 JsonWebToken" } // if success
+         * access_token은 항상 갖고 있어야 합니다.  
          2) { "code": 401, "data": "Invalid_Facebook_Access_Token" } // if facebook_access_token_error
          3) { "code": 400, "data": "addUser Fail", "reason": "duplicate-mail" } // if server_error
       
@@ -60,11 +60,11 @@ Response:
       Response Type: JSON
       Response Data: 
          1) { "code": int, "data": String, "access_token": String} // if success
-         * access_token은 항상 가지고 있어야 합니다.   
          2) { "code": int, "data": String } // if facebook_access_token_error
          3) { "code": int, "data": String, "reason": String } // if server_error
       Response Data Example: 
          1) { "code": 200, "data": "addUser OK", "access_token": "Server가 제공하는 JsonWebToken" } // if success
+         * access_token은 항상 갖고 있어야 합니다. 
          2) { "code": 401, "data": "invalid token" } // if google_access_token_error
          3) { "code": 400, "data": "addUser Fail", "reason": "duplicate-mail" } // if server_error
          4) { "code": 500, "data": "SERVER ERROR" } // if server_error

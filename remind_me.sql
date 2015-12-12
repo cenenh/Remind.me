@@ -21,3 +21,7 @@ CREATE TABLE `remind_me`.`remind_list` (
   PRIMARY KEY (`remind_index`, `email`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+select * from remind_me.remind_list;
+update remind_me.remind_list set remind_alarm = false where remind_index = 2;
+update remind_me.remind_list set remind_alarm = true where remind_index = 2;

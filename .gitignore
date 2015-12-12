@@ -5,3 +5,4 @@ npm-debug.log
 *.xls
 *.xlsx
 *.Cell
+public/images/*

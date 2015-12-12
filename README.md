@@ -42,7 +42,34 @@ Response:
          3) { "code": int, "data": String, "reason": String } // if server_error
       Response Data Example: 
          1) { "code": 200, "data": "addUser OK", "access_token": "Server가 제공하는 JsonWebToken" } // if success
+         * access_token은 항상 갖고 있어야 합니다.  
          2) { "code": 401, "data": "Invalid_Facebook_Access_Token" } // if facebook_access_token_error
          3) { "code": 400, "data": "addUser Fail", "reason": "duplicate-mail" } // if server_error
-            
+      
+```
+
+#### Sign-up using Google
+```js
+Request:
+      HTTP Method: POST
+      Request URL: http//server_address:8080/user/auth/google_login/token
+      Request Type: JSON
+      Request Data: { "access_token": String }
+      Request Data Example: { "access_token": "Google 제공한 User Token" }
+Response:
+      Response Type: JSON
+      Response Data: 
+         1) { "code": int, "data": String, "access_token": String} // if success
+         2) { "code": int, "data": String } // if facebook_access_token_error
+         3) { "code": int, "data": String, "reason": String } // if server_error
+      Response Data Example: 
+         1) { "code": 200, "data": "addUser OK", "access_token": "Server가 제공하는 JsonWebToken" } // if success
+         * access_token은 항상 갖고 있어야 합니다. 
+         2) { "code": 401, "data": "invalid token" } // if google_access_token_error
+         3) { "code": 400, "data": "addUser Fail", "reason": "duplicate-mail" } // if server_error
+         4) { "code": 500, "data": "SERVER ERROR" } // if server_error
+         5) { "code": 999, "data": "Unknown-err" } // if server_error
+         // 4) & 5) error는 일단 client 파트가 딱히 생각 안해도 될듯
+         // 이런 error를 발견하면 알려주세요..
+         
 ```

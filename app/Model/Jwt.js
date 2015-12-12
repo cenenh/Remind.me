@@ -19,8 +19,8 @@ Jwt.prototype.isAuthenticated = function(access_token, callback) {
       result.data = 'OK';
       result.user = decode;
     }
-    console.log("result in Jwt.Model.isAuthenticated()");
-    console.log(result);
+    //console.log("result in Jwt.Model.isAuthenticated()");
+    //console.log(result);
     callback(result);
   });
 };

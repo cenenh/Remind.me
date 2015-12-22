@@ -35,6 +35,9 @@ var upload = multer({
 router.use('/', jwt.isAuthenticated);
 
 router.post('/', upload.single('img'), Remind.addRemind);
+router.put('/alarm', function(req,res){
+  res.json();
+});
 
 router.get('/', function(req, res){
   res.json(req.user);

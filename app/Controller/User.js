@@ -19,13 +19,14 @@ module.exports.getUserForLogin = function(req, res){
     async.waterfall([
       function(callback){
         if(error){
-          response.code = 404;
-          response.data = "login fail";
+          response.code = 501;
+          response.data = "SERVER ERROR";
           callback(null, response);
         }
         else if(result.length > 0){
           response.code = 200;
-          response.user = result;
+          response.data = "LOGIN OK";
+          //response.user = result;
           callback(null, response);
         }
         else{

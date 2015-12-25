@@ -73,3 +73,40 @@ Response:
          // 이런 error를 발견하면 알려주세요..
          
 ```
+
+#### Sign-in (Login)
+```js
+Request:
+      HTTP Method: POST
+      Request URL: http//server_address:8080/user/auth/login
+      Request Type: JSON
+      Request Data: { "email": String, "password": String }
+      Request Data Example: { "email": "cenenh@naver.com", "password": "1q2w3e4r" }
+Response:
+      Response Type: JSON
+      Response Data: //Only return 200 or 404 or 501
+         1) { "code": int, "data": String, "token": String} // if success
+         2) { "code": int, "data": String } // if server_error
+         3) { "code": int, "data": String, "err": String } // if unknown server error
+      Response Data Example: 
+         1) { "code": 200, "data": "LOGIN OK", "token": "Server가 제공하는 JsonWebToken"} // if success
+         * token은 항상 갖고 있어야 합니다.  
+         2) { "code": 501, "data": "SERVER ERROR" } // if server_error
+         3) { "code": 404, "data": "User Not Found"} // if client_error, email 혹은 password 틀림.
+```
+
+#### Add-Remind
+```js
+Request:
+      HTTP Method: POST
+      Request URL: Request URL: http//server_address:8080/api/remind
+      Request Type: multipart/form-data // "Content-Type": "multipart/form-data"
+      Request Data: {"company": String, "category": String, "detail-info": String, "img": File}
+      //"Content-Type": "multipart/form-data" 잊지마셔유!
+Response:
+      Response Type: JSON
+      Response Data: { "code": int, "data": String }
+      Response Data Example:
+         1) { "code": 200, "data": "addRemind OK" }
+         2) { "code": 400, "data": "addRemind FAIL" }
+```

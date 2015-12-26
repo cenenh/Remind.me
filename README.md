@@ -105,8 +105,10 @@ Request:
       //"Content-Type": "multipart/form-data" 잊지마셔유!
 Response:
       Response Type: JSON
-      Response Data: { "code": int, "data": String }
+      Response Data: 
+         1) { "code": int, "data": String, "remind_index": int}
+         2) { "code": int, "data": String }
       Response Data Example:
-         1) { "code": 200, "data": "addRemind OK" }
+         1) { "code": 200, "data": "addRemind OK", remind_index: 1} // remind_index는 갖고 있어야 합니다..
          2) { "code": 400, "data": "addRemind FAIL" }
 ```

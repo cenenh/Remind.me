@@ -35,9 +35,12 @@ var upload = multer({
 router.use('/', jwt.isAuthenticated);
 
 router.post('/', upload.single('img'), Remind.addRemind);
-router.put('/alarm', function(req,res){
-  res.json();
-});
+
+router.put('/alarm', Remind.changeAlarm);
+
+router.put('/complete', Remind.changeBuyComplete);
+
+router.delete('/', Remind.deleteRemind);
 
 router.get('/', function(req, res){
   res.json(req.user);

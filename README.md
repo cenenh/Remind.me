@@ -95,12 +95,16 @@ Response:
          3) { "code": 404, "data": "User Not Found"} // if client_error, email 혹은 password 틀림.
 ```
 
+## 여기서부터는 HTTP header에 Authorization을 추가해야함.
+
 #### Add-Remind
 ```js
 Request:
       HTTP Method: POST
       Request URL: Request URL: http//server_address:8080/api/remind
       Request Type: multipart/form-data // "Content-Type": "multipart/form-data"
+      HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token" 
+      //http://stackoverflow.com/questions/5092561/http-post-request-with-authorization-on-android
       Request Data: {"company": String, "category": String, "detail-info": String, "img": File}
       //"Content-Type": "multipart/form-data" 잊지마셔유!
 Response:

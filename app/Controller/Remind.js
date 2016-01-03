@@ -24,8 +24,6 @@ module.exports.addRemind = function (req, res){
   console.log("requested data");
   remindDAO.print();
   remindDAO.addRemind(function(error, result){
-    console.log("add remind result : ");
-    console.log(result.insertId);
     if(error){
       response.code = 400;
       response.data = "addRemind FAIL";
@@ -77,4 +75,53 @@ module.exports.changeBuyComplete = function(req, res){
     }
     res.json(response);
   });
+}
+
+module.exports.deleteRemind = function(req, res){
+  var response = {};
+  var params = {
+    index: req.body.index
+  };
+  var remindDAO = new Remind(params);
+  remindDAO.deleteRemind(function(err, result){
+    if(err){
+      response.code = 400;
+      response.data = "DELETE FAIL";
+    }
+    else{
+      response.code = 200;
+      response.data = "DELETE OK";
+    }
+    res.json(response);
+  });
+}
+
+module.exports.getMyRemind = function(req, res){
+  var response = {};
+  var params = {
+    email: req.user.email
+  };
+  var remindDAO = new Remind(params);
+  remindDAO.getMyRemind(function(err, result){
+    if(err){
+      response.code = 400;
+      response.data = "GET REMIND FAIL";
+    }
+    else{
+      response.code = 200;
+      response.data = "GET REMIND OK";
+      response.reminds = result;
+    }
+    res.json(response);
+  });
+}
+
+module.exports.nearbysearch = function(req, res){
+  var response = {};
+  var params = {
+    email: req.user.email,
+    latitude : req.body.latitude,
+    longtitude : req.body.longtitude
+  };
+
 }

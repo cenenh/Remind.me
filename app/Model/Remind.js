@@ -19,7 +19,6 @@ Remind.prototype.addRemind = function(callback) {
   var data = this.data;
   async.waterfall([
     function(callback){
-      console.log("get connection in Model.Remind.addRemind!")
       connection.getConnection(function(err, connection){
         callback(null, connection);
       });
@@ -27,10 +26,6 @@ Remind.prototype.addRemind = function(callback) {
     function(connection, callback){
       var query = connection.query('INSERT INTO remind_list SET ?', data, function(query_error, query_result){
         connection.release();
-        if(query_error){
-          console.log("query error! in model of remind");
-          console.log("query error : " + query_error);
-        }
         callback(JSON.parse(JSON.stringify(query_error)), query_result);
       }); //connection.query();
     }
@@ -45,7 +40,6 @@ Remind.prototype.changeBuyComplete = function(callback) {
   var data = this.data;
   async.waterfall([
     function(callback){
-      console.log("get connection in Model.Remind.changeBuyComplete!")
       connection.getConnection(function(err, connection){
         callback(null, connection);
       });
@@ -67,8 +61,7 @@ Remind.prototype.changeAlarm = function(callback){
   var data = this.data;
   async.waterfall([
     function(callback){
-      console.log("get connection in Model.Remind.changeAlarm!")
-      connection.getConnection(function(err, connection){
+        connection.getConnection(function(err, connection){
         callback(null, connection);
       });
     },
@@ -85,7 +78,6 @@ Remind.prototype.changeAlarm = function(callback){
   });
 };
 
-
 Remind.prototype.deleteRemind = function(callback){
   //var remindDAO = new Remind(params);
   var data = this.data;
@@ -98,6 +90,27 @@ Remind.prototype.deleteRemind = function(callback){
     function(connection, callback){
       var query = connection.query('DELETE FROM remind_list where remind_index = ?',
        data.index, function(query_error, query_result){
+        connection.release();
+        callback(JSON.parse(JSON.stringify(query_error)), query_result);
+      });
+    }
+  ],
+  function(async_waterfall_error, deleteRemind_result){
+    callback(async_waterfall_error, deleteRemind_result);
+  });
+};
+
+Remind.prototype.getMyRemind = function(callback){
+  var data = this.data;
+  async.waterfall([
+    function(callback){
+      connection.getConnection(function(err, connection){
+        callback(null, connection);
+      });
+    },
+    function(connection, callback){
+      var query = connection.query('SELECT company,category,detail_info,date,img_link FROM remind_list where email = ?',
+       data.email, function(query_error, query_result){
         connection.release();
         callback(JSON.parse(JSON.stringify(query_error)), query_result);
       });

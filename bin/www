@@ -87,5 +87,4 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-  console.log("The sGen_Remind.me is Listening on " + addr.port);
 }

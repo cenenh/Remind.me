@@ -113,9 +113,8 @@ Response:
       Response Data:
          1) { "code": int, "data": String, "remind_index": int}
       Response Data Example:
-         1) { "code": 200, "data": "GET REMIND OK", /*추가 데이터*/}
-         2) { "code": 400, "data": "GET REMIND FAIL" }
-         //아래 링크를 참고하세요.
+         1) { "code": 200, "data": "addRemind OK", remind_index: 1} // remind_index는 갖고 있어야 합니다..
+         2) { "code": 400, "data": "addRemind FAIL" }
 ```
 
 #### Get-Remind
@@ -135,8 +134,10 @@ Response:
          1) { "code": int, "data": String, "remind_index": int}
          2) { "code": int, "data": String }
       Response Data Example:
-         1) { "code": 200, "data": "addRemind OK", remind_index: 1} // remind_index는 갖고 있어야 합니다..
-         2) { "code": 400, "data": "addRemind FAIL" }
+         1) { "code": 200, "data": "GET REMIND OK", /*기타 데이터들*/}
+         ![참고img](https://cloud.githubusercontent.com/assets/9075767/12205055/a8e28350-b67b-11e5-8e5e-df43eb9578df.PNG)
+         2) { "code": 400, "data": "GET REMIND FAIL" }
+         
 ```
 
 #### 알람 설정&해제

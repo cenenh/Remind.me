@@ -106,6 +106,7 @@ Request:
       HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token" 
       //http://stackoverflow.com/questions/5092561/http-post-request-with-authorization-on-android
       Request Data: {"company": String, "category": String, "detail-info": String, "img": File}
+      //없는 항목은 null 말고 http request body에 아예 값을 안넣으면 됨.
       //"Content-Type": "multipart/form-data" 잊지마셔유!
 Response:
       Response Type: JSON
@@ -116,3 +117,59 @@ Response:
          1) { "code": 200, "data": "addRemind OK", remind_index: 1} // remind_index는 갖고 있어야 합니다..
          2) { "code": 400, "data": "addRemind FAIL" }
 ```
+
+#### 알람 설정&해제
+
+```
+* add-remind를 하면 처음에는 알람 설정이 디폴트로 true가 되어있음.
+* true인 상태에서, 즉, 스위치 on인 상태에서 누르면 off가 되고,
+* false인 상태에서, 즉, 스위치 off인 상태에서 누르면 on이됨.
+* 설정 혹은 해제를 하고싶을때 http//server_address:8080/api/remind/alarm 로 PUT 요청을 하면 저렇게 된다. 
+```
+
+```js
+Request:
+      HTTP Method: PUT
+      Request URL: Request URL: http//server_address:8080/api/remind/alarm
+      Request Type: JSON
+      HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token" 
+      Request Data: {"index" : int} // add-remind시 서버가 준 index 값
+      Request Data Example : {"index" : 10}
+
+Response:
+      Response Type: JSON
+      Response Data: 
+         1) { "code": int, "data": String}
+      Response Data Example:
+         1) { "code": 200, "data": "changeAlarm OK"} 
+         2) { "code": 400, "data": "changeAlarm FAIL" }
+```
+
+#### 구매 완료 & 구매 완료 취소
+
+```
+* 위의 알람 설정&해제 와 비슷함.
+* add-remind를 하면 처음에는 구매 완료 현황이 디폴트로 false가 되어있음.
+* true인 상태에서, 즉, 스위치 on인 상태에서 누르면 off가 되고,
+* false인 상태에서, 즉, 스위치 off인 상태에서 누르면 on이됨.
+* 구매 완료 & 구매 완료 취소를 하고싶을때 http//server_address:8080/api/remind/complete 로 PUT 요청을 하면 저렇게 된다. 
+```
+
+```js
+Request:
+      HTTP Method: PUT
+      Request URL: Request URL: http//server_address:8080/api/remind/complete
+      Request Type: JSON
+      HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token" 
+      Request Data: {"index" : int} // add-remind시 서버가 준 index 값
+      Request Data Example : {"index" : 10}
+
+Response:
+      Response Type: JSON
+      Response Data: 
+         1) { "code": int, "data": String}
+      Response Data Example:
+         1) { "code": 200, "data": "changeBuyComplete OK"} 
+         2) { "code": 400, "data": "changeBuyComplete FAIL" }
+```
+

@@ -140,7 +140,7 @@ Response:
          
 ```
 #### 참고 이미지
-![get-remind img](https://cloud.githubusercontent.com/assets/9075767/12205055/a8e28350-b67b-11e5-8e5e-df43eb9578df.PNG)
+![get-remind img](https://cloud.githubusercontent.com/assets/9075767/12205140/235f2afc-b67c-11e5-8a34-b1218945df0f.PNG)
 
 #### 알람 설정&해제
 

@@ -105,7 +105,7 @@ Request:
       Request Type: multipart/form-data // "Content-Type": "multipart/form-data"
       HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token"
       //http://stackoverflow.com/questions/5092561/http-post-request-with-authorization-on-android
-      Request Data: {"company": String, "category": String, "detail-info": String, "img": File}
+      Request Data: {"company": String, "category": String, "detail_info": String, "img": File}
       //없는 항목은 null 말고 http request body에 아예 값을 안넣으면 됨.
       //"Content-Type": "multipart/form-data" 잊지마셔유!
 Response:

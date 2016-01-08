@@ -23,6 +23,7 @@ var remind = require('./routes/remind/Remind');
 //for TEST API
 var test_api = require('./routes/test_api');
 var echo = require('./routes/test/echo');
+var test_db = require('./routes/test/db');
 
 var app = express();
 
@@ -62,7 +63,8 @@ app.use('/auth/google_login/token', google_login);
 
 //for test_api
 app.use('/testapi', test_api);
-app.use('/test/echo',echo);
+app.use('/test/echo', echo);
+app.use('/test/db', test_db);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

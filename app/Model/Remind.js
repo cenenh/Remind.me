@@ -109,7 +109,7 @@ Remind.prototype.getMyRemind = function(callback){
       });
     },
     function(connection, callback){
-      var query = connection.query('SELECT company,category,detail_info,date,img_link FROM remind_list where email = ?',
+      var query = connection.query('SELECT company,category,detail_info,date,img_link,buy_complete,remind_alarm FROM remind_list where email = ?',
        data.email, function(query_error, query_result){
         connection.release();
         callback(JSON.parse(JSON.stringify(query_error)), query_result);

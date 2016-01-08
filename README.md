@@ -10,18 +10,18 @@ $ npm start
 ## API Usage
 #### Sign-up using E-mail
 ```js
-Request: 
-      HTTP Method: POST 
+Request:
+      HTTP Method: POST
       Request URL: http://server_address:8080/user/auth/signup
       Request Type: JSON
       Request Data: { "email": String, "name": String, "password": String }
-    
-Response: 
+
+Response:
       Response Type: JSON
-      Response Data: //Only return 200 or 400 
+      Response Data: //Only return 200 or 400
          1) { "code": int, "data": String } // if success
          2) { "code": int, "data": String, "reason": String } // if error
-      Response Data Example: 
+      Response Data Example:
          1) { "code": 200, "data": "addUser OK" }
          2) { "code": 400, "data": "addUser Fail", "reason": "duplicate-mail" }
 ```
@@ -40,12 +40,12 @@ Response:
          1) { "code": int, "data": String, "access_token": String} // if success
          2) { "code": int, "data": String } // if facebook_access_token_error
          3) { "code": int, "data": String, "reason": String } // if server_error
-      Response Data Example: 
+      Response Data Example:
          1) { "code": 200, "data": "addUser OK", "access_token": "Server가 제공하는 JsonWebToken" } // if success
          * access_token은 항상 갖고 있어야 합니다.  
          2) { "code": 401, "data": "Invalid_Facebook_Access_Token" } // if facebook_access_token_error
          3) { "code": 400, "data": "addUser Fail", "reason": "duplicate-mail" } // if server_error
-      
+
 ```
 
 #### Sign-up using Google
@@ -58,20 +58,20 @@ Request:
       Request Data Example: { "access_token": "Google 제공한 User Token" }
 Response:
       Response Type: JSON
-      Response Data: 
+      Response Data:
          1) { "code": int, "data": String, "access_token": String} // if success
          2) { "code": int, "data": String } // if facebook_access_token_error
          3) { "code": int, "data": String, "reason": String } // if server_error
-      Response Data Example: 
+      Response Data Example:
          1) { "code": 200, "data": "addUser OK", "access_token": "Server가 제공하는 JsonWebToken" } // if success
-         * access_token은 항상 갖고 있어야 합니다. 
+         * access_token은 항상 갖고 있어야 합니다.
          2) { "code": 401, "data": "invalid token" } // if google_access_token_error
          3) { "code": 400, "data": "addUser Fail", "reason": "duplicate-mail" } // if server_error
          4) { "code": 500, "data": "SERVER ERROR" } // if server_error
          5) { "code": 999, "data": "Unknown-err" } // if server_error
          // 4) & 5) error는 일단 client 파트가 딱히 생각 안해도 될듯
          // 이런 error를 발견하면 알려주세요..
-         
+
 ```
 
 #### Sign-in (Login)
@@ -88,7 +88,7 @@ Response:
          1) { "code": int, "data": String, "token": String} // if success
          2) { "code": int, "data": String } // if server_error
          3) { "code": int, "data": String, "err": String } // if unknown server error
-      Response Data Example: 
+      Response Data Example:
          1) { "code": 200, "data": "LOGIN OK", "token": "Server가 제공하는 JsonWebToken"} // if success
          * token은 항상 갖고 있어야 합니다.  
          2) { "code": 501, "data": "SERVER ERROR" } // if server_error
@@ -103,14 +103,35 @@ Request:
       HTTP Method: POST
       Request URL: Request URL: http//server_address:8080/api/remind
       Request Type: multipart/form-data // "Content-Type": "multipart/form-data"
-      HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token" 
+      HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token"
       //http://stackoverflow.com/questions/5092561/http-post-request-with-authorization-on-android
       Request Data: {"company": String, "category": String, "detail-info": String, "img": File}
       //없는 항목은 null 말고 http request body에 아예 값을 안넣으면 됨.
       //"Content-Type": "multipart/form-data" 잊지마셔유!
 Response:
       Response Type: JSON
-      Response Data: 
+      Response Data:
+         1) { "code": int, "data": String, "remind_index": int}
+      Response Data Example:
+         1) { "code": 200, "data": "GET REMIND OK", /*추가 데이터*/}
+         2) { "code": 400, "data": "GET REMIND FAIL" }
+         //아래 링크를 참고하세요.
+```
+
+#### Get-Remind
+```
+내가 등록한 remind를 response 해준다.
+```
+```js
+Request:
+      HTTP Method: GET
+      Request URL: Request URL: http//server_address:8080/api/remind
+      Request Type: JSON
+      HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token"
+      // request data 없음.
+Response:
+      Response Type: JSON
+      Response Data:
          1) { "code": int, "data": String, "remind_index": int}
          2) { "code": int, "data": String }
       Response Data Example:
@@ -124,7 +145,7 @@ Response:
 * add-remind를 하면 처음에는 알람 설정이 디폴트로 true가 되어있음.
 * true인 상태에서, 즉, 스위치 on인 상태에서 누르면 off가 되고,
 * false인 상태에서, 즉, 스위치 off인 상태에서 누르면 on이됨.
-* 설정 혹은 해제를 하고싶을때 http//server_address:8080/api/remind/alarm 로 PUT 요청을 하면 저렇게 된다. 
+* 설정 혹은 해제를 하고싶을때 http//server_address:8080/api/remind/alarm 로 PUT 요청을 하면 저렇게 된다.
 ```
 
 ```js
@@ -132,16 +153,16 @@ Request:
       HTTP Method: PUT
       Request URL: Request URL: http//server_address:8080/api/remind/alarm
       Request Type: JSON
-      HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token" 
+      HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token"
       Request Data: {"index" : int} // add-remind시 서버가 준 index 값
       Request Data Example : {"index" : 10}
 
 Response:
       Response Type: JSON
-      Response Data: 
+      Response Data:
          1) { "code": int, "data": String}
       Response Data Example:
-         1) { "code": 200, "data": "changeAlarm OK"} 
+         1) { "code": 200, "data": "changeAlarm OK"}
          2) { "code": 400, "data": "changeAlarm FAIL" }
 ```
 
@@ -152,7 +173,7 @@ Response:
 * add-remind를 하면 처음에는 구매 완료 현황이 디폴트로 false가 되어있음.
 * true인 상태에서, 즉, 스위치 on인 상태에서 누르면 off가 되고,
 * false인 상태에서, 즉, 스위치 off인 상태에서 누르면 on이됨.
-* 구매 완료 & 구매 완료 취소를 하고싶을때 http//server_address:8080/api/remind/complete 로 PUT 요청을 하면 저렇게 된다. 
+* 구매 완료 & 구매 완료 취소를 하고싶을때 http//server_address:8080/api/remind/complete 로 PUT 요청을 하면 저렇게 된다.
 ```
 
 ```js
@@ -160,16 +181,15 @@ Request:
       HTTP Method: PUT
       Request URL: Request URL: http//server_address:8080/api/remind/complete
       Request Type: JSON
-      HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token" 
+      HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token"
       Request Data: {"index" : int} // add-remind시 서버가 준 index 값
       Request Data Example : {"index" : 10}
 
 Response:
       Response Type: JSON
-      Response Data: 
+      Response Data:
          1) { "code": int, "data": String}
       Response Data Example:
-         1) { "code": 200, "data": "changeBuyComplete OK"} 
+         1) { "code": 200, "data": "changeBuyComplete OK"}
          2) { "code": 400, "data": "changeBuyComplete FAIL" }
 ```
-

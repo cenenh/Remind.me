@@ -1,11 +1,12 @@
 module.exports = {
   url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
   params : {
-    location: '',
-    radius: 2500,
-    name: '',
-    language: 'ko',
-    key : 'AIzaSyALuZpjiForJ2p6kB5BK57uszIpokZj9tA'
+    location : '',
+    radius : 2500,
+    name : '',
+    language : 'ko',
+    key : 'AIzaSyALuZpjiForJ2p6kB5BK57uszIpokZj9tA',
+    pagetoken : '',
   }
 };
 /*

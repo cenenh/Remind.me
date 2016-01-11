@@ -34,7 +34,9 @@ router.post('/', function(req, res){
           password: result.sub, //user_id in google
         };
         user = JSON.stringify(user);
-        res.redirect(307, 'http://54.65.85.60:8080/user/'+encodeURIComponent(user));
+        // res.redirect(307, 'http://54.65.85.60:8080/user/'+encodeURIComponent(user));
+        // linux 서버에서 res.redirect(307,url); 이 잘 안먹힘..이유는 모름...
+        res.redirect('/user/'+encodeURIComponent(user));
 	  } //if res.code === 200
       else{
         res.json({

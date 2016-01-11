@@ -40,7 +40,7 @@ router.post('/', function(req, res){
 		else{ //issue : send invalid token when the error occurs in this else part...
 			user = JSON.stringify(user);
       //status code 307 -> redirect to POST method.
-			res.redirect(307, '/user/'+encodeURIComponent(user));
+			res.redirect('/user/'+encodeURIComponent(user));
 		}
 	})(req, res);
 });

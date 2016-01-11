@@ -39,6 +39,4 @@ router.delete('/', Remind.deleteRemind);
 
 router.get('/', Remind.getMyRemind);
 
-router.post('/nearbysearch', Remind.nearbysearch);
-
 module.exports = router;

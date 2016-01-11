@@ -18,7 +18,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var ping = require('./routes/ping');
 var remind = require('./routes/remind/Remind');
-
+var places = require('./routes/Places');
 
 //for TEST API
 var test_api = require('./routes/test_api');
@@ -46,6 +46,7 @@ app.use('/users', users);
 //for REST API
 app.use('/api', ping);
 app.use('/api/remind', remind);
+app.use('/api/places', places);
 app.use('/user', user);
 
 //for facebook-login using web

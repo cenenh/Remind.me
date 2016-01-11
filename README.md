@@ -30,7 +30,7 @@ Response:
 ```js
 Request:
       HTTP Method: POST
-      Request URL: http//server_address:8080/user/auth/facebook_login/token
+      Request URL: http//server_address:8080/auth/facebook_login/token
       Request Type: JSON
       Request Data: { "access_token": String }
       Request Data Example: { "access_token": "Facebook이 제공한 User Token" }
@@ -52,7 +52,7 @@ Response:
 ```js
 Request:
       HTTP Method: POST
-      Request URL: http//server_address:8080/user/auth/google_login/token
+      Request URL: http//server_address:8080/auth/google_login/token
       Request Type: JSON
       Request Data: { "access_token": String }
       Request Data Example: { "access_token": "Google 제공한 User Token" }
@@ -105,7 +105,7 @@ Request:
       Request Type: multipart/form-data // "Content-Type": "multipart/form-data"
       HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token"
       //http://stackoverflow.com/questions/5092561/http-post-request-with-authorization-on-android
-      Request Data: {"company": String, "category": String, "detail-info": String, "img": File}
+      Request Data: {"company": String, "category": String, "detail_info": String, "img": File}
       //없는 항목은 null 말고 http request body에 아예 값을 안넣으면 됨.
       //"Content-Type": "multipart/form-data" 잊지마셔유!
 Response:
@@ -113,9 +113,8 @@ Response:
       Response Data:
          1) { "code": int, "data": String, "remind_index": int}
       Response Data Example:
-         1) { "code": 200, "data": "GET REMIND OK", /*추가 데이터*/}
-         2) { "code": 400, "data": "GET REMIND FAIL" }
-         //아래 링크를 참고하세요.
+         1) { "code": 200, "data": "addRemind OK", remind_index: 1} // remind_index는 갖고 있어야 합니다..
+         2) { "code": 400, "data": "addRemind FAIL" }
 ```
 
 #### Get-Remind
@@ -135,9 +134,13 @@ Response:
          1) { "code": int, "data": String, "remind_index": int}
          2) { "code": int, "data": String }
       Response Data Example:
-         1) { "code": 200, "data": "addRemind OK", remind_index: 1} // remind_index는 갖고 있어야 합니다..
-         2) { "code": 400, "data": "addRemind FAIL" }
+         1) { "code": 200, "data": "GET REMIND OK", /*기타 데이터들*/} 
+         // 아래 이미지 참고
+         2) { "code": 400, "data": "GET REMIND FAIL" }
+         
 ```
+#### 참고 이미지
+![get-remind img](https://cloud.githubusercontent.com/assets/9075767/12205140/235f2afc-b67c-11e5-8a34-b1218945df0f.PNG)
 
 #### 알람 설정&해제
 

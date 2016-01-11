@@ -115,13 +115,3 @@ module.exports.getMyRemind = function(req, res){
     res.json(response);
   });
 }
-
-module.exports.nearbysearch = function(req, res){
-  var response = {};
-  var params = {
-    email: req.user.email,
-    latitude : req.body.latitude,
-    longtitude : req.body.longtitude
-  };
-
-}

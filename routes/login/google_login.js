@@ -33,9 +33,11 @@ router.post('/', function(req, res){
           name : result.name,
           password: result.sub, //user_id in google
         };
+		console.log(user);
         user = JSON.stringify(user);
-        res.redirect(307, '/user/'+encodeURIComponent(user));
-      } //if res.code === 200
+        //res.redirect(307, 'http://54.65.85.60:8080/user/'+encodeURIComponent(user));
+		res.redirect('http://54.65.85.60:8080/user/'+encodeURIComponent(user));
+	  } //if res.code === 200
       else{
         res.json({
           code: 999,

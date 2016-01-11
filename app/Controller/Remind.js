@@ -1,9 +1,6 @@
 /**
  * Created by eunho on 2015-12-05.
  */
-
- //Controller of Remind.
-
  var Remind = require('../Model/Remind');
  var moment = require('moment');
  var server_config = require('../../config/server');
@@ -34,7 +31,97 @@ module.exports.addRemind = function (req, res){
     else{
       response.code = 200;
       response.data = "addRemind OK";
+      response.remind_index = result.insertId;
     }
     res.json(response);
   });
 };
+
+module.exports.changeAlarm = function(req, res){
+  var response = {};
+  var params = {
+    email: req.user.email,
+    index: req.body.index
+  };
+  var remindDAO = new Remind(params);
+  remindDAO.changeAlarm(function(err, result){
+    if(err){
+      response.code = 400;
+      response.data = "changeAlarm FAIL";
+    }
+    else{
+      response.code = 200;
+      response.data = "changeAlarm OK";
+    }
+    res.json(response);
+  });
+};
+
+module.exports.changeBuyComplete = function(req, res){
+  var response = {};
+  var params = {
+    email: req.user.email,
+    index: req.body.index
+  };
+  var remindDAO = new Remind(params);
+  remindDAO.changeBuyComplete(function(err, result){
+    if(err){
+      response.code = 400;
+      response.data = "changeBuyComplete FAIL";
+    }
+    else{
+      response.code = 200;
+      response.data = "changeBuyComplete OK";
+    }
+    res.json(response);
+  });
+}
+
+module.exports.deleteRemind = function(req, res){
+  var response = {};
+  var params = {
+    index: req.body.index
+  };
+  var remindDAO = new Remind(params);
+  remindDAO.deleteRemind(function(err, result){
+    if(err){
+      response.code = 400;
+      response.data = "DELETE FAIL";
+    }
+    else{
+      response.code = 200;
+      response.data = "DELETE OK";
+    }
+    res.json(response);
+  });
+}
+
+module.exports.getMyRemind = function(req, res){
+  var response = {};
+  var params = {
+    email: req.user.email
+  };
+  var remindDAO = new Remind(params);
+  remindDAO.getMyRemind(function(err, result){
+    if(err){
+      response.code = 400;
+      response.data = "GET REMIND FAIL";
+    }
+    else{
+      response.code = 200;
+      response.data = "GET REMIND OK";
+      response.reminds = result;
+    }
+    res.json(response);
+  });
+}
+
+module.exports.nearbysearch = function(req, res){
+  var response = {};
+  var params = {
+    email: req.user.email,
+    latitude : req.body.latitude,
+    longtitude : req.body.longtitude
+  };
+
+}

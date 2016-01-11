@@ -27,20 +27,18 @@ var upload = multer({
   storage : storage
 });
 
-// GET localhost:8080/api/remind
-// POST localhost:8080/api/remind
-// PUT localhost:8080/api/remind
-// DELETE localhost:8080/api/remind
-
 router.use('/', jwt.isAuthenticated);
 
 router.post('/', upload.single('img'), Remind.addRemind);
-router.put('/alarm', function(req,res){
-  res.json();
-});
 
-router.get('/', function(req, res){
-  res.json(req.user);
-});
+router.put('/alarm', Remind.changeAlarm);
+
+router.put('/complete', Remind.changeBuyComplete);
+
+router.delete('/', Remind.deleteRemind);
+
+router.get('/', Remind.getMyRemind);
+
+router.post('/nearbysearch', Remind.nearbysearch);
 
 module.exports = router;

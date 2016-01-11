@@ -30,7 +30,7 @@ Response:
 ```js
 Request:
       HTTP Method: POST
-      Request URL: http//server_address:8080/user/auth/facebook_login/token
+      Request URL: http//server_address:8080/auth/facebook_login/token
       Request Type: JSON
       Request Data: { "access_token": String }
       Request Data Example: { "access_token": "Facebook이 제공한 User Token" }
@@ -52,7 +52,7 @@ Response:
 ```js
 Request:
       HTTP Method: POST
-      Request URL: http//server_address:8080/user/auth/google_login/token
+      Request URL: http//server_address:8080/auth/google_login/token
       Request Type: JSON
       Request Data: { "access_token": String }
       Request Data Example: { "access_token": "Google 제공한 User Token" }

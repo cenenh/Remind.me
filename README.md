@@ -232,3 +232,21 @@ Response:
          1) { "code": 200, "data": "changeBuyComplete OK"}
          2) { "code": 400, "data": "changeBuyComplete FAIL" }
 ```
+
+
+#### 정규 테스트용
+```js
+Request:
+      HTTP Method: POST
+      Request URL: Request URL: http//server_address:8080/api/places/test
+      Request Type: JSON
+      Request Data: {"latitude" : double, "longtitude" : double }
+      Request Data Example : {"latitude" : 37.5533, "longtitude": 126.974 }
+
+Response:
+      Response Type: JSON
+      Response Data:
+         1) { "code": int, "latitude": double, "longtitude": double }
+      Response Data Example:
+         1) { "code": 200, "latitude": "37.5533", "longtitude": "126.974" }
+```

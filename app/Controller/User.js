@@ -6,8 +6,6 @@ var jwt = require('jsonwebtoken');
 
 //for login
 module.exports.getUserForLogin = function(req, res){
-  console.log("request method : " + req.method);
-  console.log("user.getUserForLogin() is called!");
   var response = {};
   var user = new User();
   user.email = req.body.email;
@@ -60,9 +58,6 @@ module.exports.getUserForLogin = function(req, res){
 };
 
 module.exports.getUserById = function(req, res){
-  console.log("request method : " + req.method);
-  console.log("user.getUserById() is called!");
-
   var response = {};
   var getUser = new User();
   var email = req.body.email;
@@ -84,8 +79,6 @@ module.exports.getUserById = function(req, res){
 };
 
 module.exports.getAll = function(req, res){
-  console.log("request method : " + req.method);
-  console.log("user.getAll() is called!");
   var myUser = new User();
   myUser.getAll(function (result){
     //console.log(result);
@@ -95,9 +88,6 @@ module.exports.getAll = function(req, res){
 };
 
 module.exports.addUser = function(req, res){
-
-  console.log("request method : " + req.method);
-  console.log("user.addUser() is called!");
 
   var response = {};
   var newUser = new User();
@@ -139,5 +129,22 @@ module.exports.addUser = function(req, res){
     else{
       res.json(response);
     }
+  });
+};
+
+module.exports.deleteUser = function(req, res){
+  var response = {};
+  var user = new User();
+  user.email = req.user.email;
+  user.deleteUser(user, function(err, result){
+    if(err){
+      response.code = 404; //user not found
+      response.data = "logout fail";
+    }
+    else{
+      response.code = 200;
+      response.data = "logout ok";
+    }
+    res.json(response);
   });
 };

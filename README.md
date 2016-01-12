@@ -146,16 +146,17 @@ Request:
 Response:
       Response Type: JSON
       Response Data:
-         1) { "code": int, "data": String, "remind_index": int}
+         1) { "code": int, "data": String, "reminds": JSON_ARRAY}
          2) { "code": int, "data": String }
       Response Data Example:
-         1) { "code": 200, "data": "GET REMIND OK", /*기타 데이터들*/}
+         1) { "code": 200, "data": "GET REMIND OK", "reminds" : [JSON, JSON, JSON, JSON] }
          // 아래 이미지 참고
          2) { "code": 400, "data": "GET REMIND FAIL" }
 
 ```
 #### 참고 이미지
-![get-remind img](https://cloud.githubusercontent.com/assets/9075767/12205140/235f2afc-b67c-11e5-8a34-b1218945df0f.PNG)
+![kakaotalk_20160112_221601519](https://cloud.githubusercontent.com/assets/9075767/12264457/5b9494d8-b97a-11e5-9100-8b769b675648.png)
+
 
 #### 알람 설정&해제
 

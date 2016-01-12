@@ -6,14 +6,18 @@ var express = require('express');
 var jwt = require('../app/Controller/Jwt');
 var router = express.Router();
 
-router.use('/', jwt.isAuthenticated, function(req, res, next){
+router.use('/search', jwt.isAuthenticated, function(req, res, next){
   req.middleware = 2;
   console.log(req.user);
   next();
 });
 
-router.post('/', function(req, res){
-  res.json('hi!');
+router.post('/test', function(req, res){
+  var response = {};
+  response.code = 200;
+  response.latitude = req.body.latitude;
+  response.longtitude = req.body.longtitude;
+  res.json(response);
 });
 
 module.exports = router;

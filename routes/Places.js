@@ -14,14 +14,23 @@ router.post('/search', function(req, res){
   res.json(response);
 });
 
+
+
+
+
+
 router.post('/test', function(req, res){
   var response = {};
   response.code = 200;
   results = [];
-  var a = { lat : 37.55500577, lng : 126.97367191};
-  var b = {lat : 37.55447843, lng : 126.97528124};
-  var c = {lat : 37.55211385, lng : 126.97528124};
-  var d = {lat : 37.55134833, lng : 126.97229862};
+  var a = {
+    id : 1,
+    lat : 37.55500577,
+    lng : 126.97367191
+  };
+  var b = { id : 2, lat : 37.55447843, lng : 126.97528124 };
+  var c = { id : 3, lat : 37.55211385, lng : 126.97528124 };
+  var d = { id : 4, lat : 37.55134833, lng : 126.97229862 };
   results.push(a);
   results.push(b);
   results.push(c);

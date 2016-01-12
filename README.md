@@ -250,3 +250,6 @@ Response:
       Response Data Example:
          1) { "code": 200, "latitude": "37.5533", "longtitude": "126.974" }
 ```
+#### 정규 테스트용 참고이미지
+![kakaotalk_20160112_235637679](https://cloud.githubusercontent.com/assets/9075767/12266801/72607534-b988-11e5-8937-3594cf7c5242.png)
+![kakaotalk_20160113_000739463](https://cloud.githubusercontent.com/assets/9075767/12267094/cdf3c1de-b989-11e5-90e6-baf0ef68a39b.png)

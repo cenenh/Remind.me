@@ -97,6 +97,21 @@ Response:
 
 ## 여기서부터는 HTTP header에 Authorization을 추가해야함.
 
+#### Logout (google & facebook)
+```js
+Request:
+      HTTP Method: DELETE
+      Request URL: Request URL: http//server_address:8080/user/auth/logout
+      HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token"
+Response:
+      Response Type: JSON
+      Response Data:
+         1) { "code": int, "data": String }
+      Response Data Example:
+         1) { "code": 200, "data": "Logout OK" }
+         2) { "code": 400, "data": "Logout FAIL" }
+```
+
 #### Add-Remind
 ```js
 Request:
@@ -134,10 +149,10 @@ Response:
          1) { "code": int, "data": String, "remind_index": int}
          2) { "code": int, "data": String }
       Response Data Example:
-         1) { "code": 200, "data": "GET REMIND OK", /*기타 데이터들*/} 
+         1) { "code": 200, "data": "GET REMIND OK", /*기타 데이터들*/}
          // 아래 이미지 참고
          2) { "code": 400, "data": "GET REMIND FAIL" }
-         
+
 ```
 #### 참고 이미지
 ![get-remind img](https://cloud.githubusercontent.com/assets/9075767/12205140/235f2afc-b67c-11e5-8a34-b1218945df0f.PNG)

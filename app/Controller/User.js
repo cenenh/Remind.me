@@ -138,12 +138,12 @@ module.exports.deleteUser = function(req, res){
   user.email = req.user.email;
   user.deleteUser(user, function(err, result){
     if(err){
-      response.code = 404; //user not found
-      response.data = "logout fail";
+      response.code = 400;
+      response.data = "Logout FAIL";
     }
     else{
       response.code = 200;
-      response.data = "logout ok";
+      response.data = "Logout OK";
     }
     res.json(response);
   });

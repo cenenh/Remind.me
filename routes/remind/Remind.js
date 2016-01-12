@@ -29,7 +29,9 @@ var upload = multer({
 
 router.use('/', jwt.isAuthenticated);
 
-router.post('/', upload.single('img'), Remind.addRemind);
+router.post('/img', upload.single('img'), Remind.addRemind);
+
+router.post('/json', Remind.addRemind);
 
 router.put('/alarm', Remind.changeAlarm);
 

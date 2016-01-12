@@ -112,17 +112,37 @@ Response:
          2) { "code": 400, "data": "Logout FAIL" }
 ```
 
-#### Add-Remind
+#### Add-Remind with Image File
 ```js
 Request:
       HTTP Method: POST
-      Request URL: Request URL: http//server_address:8080/api/remind
+      Request URL: Request URL: http//server_address:8080/api/remind/img
       Request Type: multipart/form-data // "Content-Type": "multipart/form-data"
       HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token"
       //http://stackoverflow.com/questions/5092561/http-post-request-with-authorization-on-android
       Request Data: {"company": String, "category": String, "detail_info": String, "img": File}
       //없는 항목은 null 말고 http request body에 아예 값을 안넣으면 됨.
       //"Content-Type": "multipart/form-data" 잊지마셔유!
+Response:
+      Response Type: JSON
+      Response Data:
+         1) { "code": int, "data": String, "remind_index": int}
+      Response Data Example:
+         1) { "code": 200, "data": "addRemind OK", remind_index: 1} // remind_index는 갖고 있어야 합니다..
+         2) { "code": 400, "data": "addRemind FAIL" }
+```
+
+#### Add-Remind with JSON
+```js
+Request:
+      HTTP Method: POST
+      Request URL: Request URL: http//server_address:8080/api/remind/json
+      Request Type: JSON
+      HTTP header [Authorization] : "서버가 로그인했을때 넘겨준 token"
+      //http://stackoverflow.com/questions/5092561/http-post-request-with-authorization-on-android
+      Request Data: {"company": String, "category": String, "detail_info": String }
+      //없는 항목은 null 말고 http request body에 아예 값을 안넣으면 됨.
+
 Response:
       Response Type: JSON
       Response Data:

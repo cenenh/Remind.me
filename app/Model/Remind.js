@@ -121,4 +121,25 @@ Remind.prototype.getMyRemind = function(callback){
   });
 };
 
+Remind.prototype.getRemindWithPlaces = function(callback){
+  var data = this.data;
+  async.waterfall([
+    function(callback){
+      connection.getConnection(function(err, connection){
+        callback(null, connection);
+      });
+    },
+    function(connection, callback){
+      var sql = 'SELECT company,category,img_link,detail_info,date FROM remind_list where email = ? and remind_alarm = true';
+      connection.query(sql, data.email, function(query_error, query_result){
+        connection.release();
+        callback(JSON.parse(JSON.stringify(query_error)), query_result);
+      });
+    }
+  ],
+  function(async_waterfall_error, getRemindWithPlaces_result){
+    callback(async_waterfall_error, getRemindWithPlaces_result);
+  });
+};
+
 module.exports = Remind;

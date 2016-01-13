@@ -25,7 +25,7 @@ function set_next_token(token) {
 var request_params = {};
 _.extend(request_params, googleMap.params);
 request_params.location = "37.5533,126.974";
-request_params.name = "GS25";
+request_params.name = "편의점";
 var final_result = [];
 //getPlaces(googleMap.url, request_params);
 async.waterfall([
@@ -78,6 +78,5 @@ async.waterfall([
 ],
 function(err, result){
   if(!err){
-    //console.log(result);
   }
 });

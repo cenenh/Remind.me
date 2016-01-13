@@ -2,7 +2,7 @@ module.exports = {
   url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
   params : {
     location : '',
-    radius : 500,
+    radius : 600,
     name : '',
     language : 'ko',
     key : 'AIzaSyALuZpjiForJ2p6kB5BK57uszIpokZj9tA',

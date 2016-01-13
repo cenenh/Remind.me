@@ -10,7 +10,7 @@
 module.exports.addRemind = function (req, res){
   var response = {};
   var params = {
-    email : req.user.email,
+    email: req.user.email,
     company: req.body.company,
     category: req.body.category,
     detail_info: req.body.detail_info,
@@ -21,8 +21,6 @@ module.exports.addRemind = function (req, res){
     params.img_link = img_link;
   }
   var remindDAO = new Remind(params);
-  console.log("requested data");
-  remindDAO.print();
   remindDAO.addRemind(function(error, result){
     if(error){
       response.code = 400;
@@ -113,5 +111,35 @@ module.exports.getMyRemind = function(req, res){
       response.reminds = result;
     }
     res.json(response);
+  });
+}
+
+module.exports.getRemindWithPlaces = function(req, res, next){
+  var response = {};
+  var params = {
+    email: req.user.email,
+    location: req.body.lat + ',' + req.body.lng
+  };
+  var remindDAO = new Remind(params);
+
+  remindDAO.getRemindWithPlaces(function(err, reminds){
+    if(err){
+      res.json({
+        code : 500,
+        data : "SERVER_ERROR"
+      });
+    }
+    else {
+      if(reminds.length === 0){
+        res.json({
+          code : 200,
+          data :  "NO REMINDS YET"
+        })
+      }
+      else{
+        req.reminds = reminds;
+        next();
+      }
+    }
   });
 }

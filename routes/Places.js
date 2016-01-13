@@ -4,20 +4,19 @@
 var express = require('express');
 //var Places = require('../app/Controller/Places');
 var jwt = require('../app/Controller/Jwt');
+var places = require('../app/Controller/Places');
+var remind = require('../app/Controller/Remind');
 var router = express.Router();
 
-router.use('/search', jwt.isAuthenticated);
+router.use('/search', jwt.isAuthenticated, remind.getRemindWithPlaces);
 
-router.post('/search', function(req, res){
+router.post('/search', places.search);
+
+/*router.post('/search', function(req, res){
   var response = {};
   response.email = req.user.email;
   res.json(response);
-});
-
-
-
-
-
+});*/
 
 router.post('/test', function(req, res){
   var response = {};

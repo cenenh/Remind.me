@@ -6,7 +6,7 @@ module.exports = {
     name : '',
     language : 'ko',
     key : 'AIzaSyALuZpjiForJ2p6kB5BK57uszIpokZj9tA',
-    pagetoken : '',
+    type: ''
   }
 };
 /*

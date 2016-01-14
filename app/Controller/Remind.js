@@ -5,6 +5,7 @@
  var moment = require('moment');
  var server_config = require('../../config/server');
  var multer = require('multer');
+ var category_config = require('../../config/category');
 
 //POST
 module.exports.addRemind = function (req, res){
@@ -16,10 +17,22 @@ module.exports.addRemind = function (req, res){
     detail_info: req.body.detail_info,
     date: moment().format('LLLL')
   };
+
+  if(req.body.category === category_config.case_drugstore){
+    params.category = undefined;
+    params.company  = category_config.case_oliveyoung;
+  }
+
+  if(req.body.category === category_config.case_home_goods_store){
+    params.category = undefined;
+    params.company  = category_config.case_daeso;
+  }
+
   if(req.uploaded_file_name){
     var img_link = server_config.img_link + req.uploaded_file_name;
     params.img_link = img_link;
   }
+
   var remindDAO = new Remind(params);
   remindDAO.addRemind(function(error, result){
     if(error){

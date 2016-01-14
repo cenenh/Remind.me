@@ -18,16 +18,6 @@ module.exports.addRemind = function (req, res){
     date: moment().format('LLLL')
   };
 
-  if(req.body.category === category_config.case_drugstore){
-    params.category = undefined;
-    params.company  = category_config.case_oliveyoung;
-  }
-
-  if(req.body.category === category_config.case_home_goods_store){
-    params.category = undefined;
-    params.company  = category_config.case_daeso;
-  }
-
   if(req.uploaded_file_name){
     var img_link = server_config.img_link + req.uploaded_file_name;
     params.img_link = img_link;

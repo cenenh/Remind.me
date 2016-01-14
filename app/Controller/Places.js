@@ -7,6 +7,7 @@ var moment = require('moment');
 var async = require('async');
 var googleMap = require('../../config/googleMap');
 var _ = require('underscore');
+var category_config = require('../../config/category');
 
 module.exports.search = function(req, res){
   var url = googleMap.url;
@@ -24,9 +25,22 @@ module.exports.search = function(req, res){
       qs.name = remind.company;
     }
     else if(remind.category){
-      qs.type = remind.category;
+      // category가 drugstore면 올리브영으로 검색.
+      if(remind.category === category_config.case_drugstore){
+         qs.name = category_config.case_oliveyoung;
+         qs.type = '';
+      }
+      // category가  home_goods_store면 다이소로 검색.
+      else if(remind.category === category_config.case_home_goods_store){
+        qs.name = category_config.case_daeso;
+        qs.type = '';
+      }
+      // 그 예외 6가지 경우.
+      else {
+        qs.type = remind.category;
+      }
     }
-    
+
     placesDAO.getPlacesFromGoogle(url, qs, function(err, googlePlaces){
       if(googlePlaces.status !== 'ZERO_RESULTS'){
         async.eachSeries(googlePlaces.results, function(googlePlace, callback){

@@ -14,18 +14,22 @@ module.exports.search = function(req, res){
   var response_arr = [];
   var placesDAO = new Places(location);
   var reminds = req.reminds;
-  console.log(reminds);
-  console.log("lets search!")
 
   async.eachSeries(reminds, function(remind, callback){
     var qs = {};
     _.extend(qs, googleMap.params);
     qs.location = location;
-    qs.name = remind.company || remind.category;
+
+    if(remind.company){
+      qs.name = remind.company;
+    }
+    else if(remind.category){
+      qs.type = remind.category;
+    }
+    
     placesDAO.getPlacesFromGoogle(url, qs, function(err, googlePlaces){
       if(googlePlaces.status !== 'ZERO_RESULTS'){
         async.eachSeries(googlePlaces.results, function(googlePlace, callback){
-          console.log(googlePlace);
           response_arr.push({
             name: googlePlace.name,
             id: googlePlace.id,
@@ -45,6 +49,7 @@ module.exports.search = function(req, res){
       code: 200,
       data : response_arr
     });
+    delete req.reminds;
   });
 }
 

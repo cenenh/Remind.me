@@ -13,11 +13,15 @@ module.exports.addRemind = function (req, res){
   var response = {};
   var params = {
     email: req.user.email,
-    company: urlencode.decode(req.body.company),
-    category: urlencode.decode(req.body.category),
     detail_info: urlencode.decode(req.body.detail_info),
     date: moment().format('LLLL')
   };
+  if(req.body.company){
+    params.company = urlencode.decode(req.body.company);
+  }
+  if(req.body.category){
+    params.category = urlencode.decode(req.body.category);
+  }
 
   if(req.uploaded_file_name){
     var img_link = server_config.img_link + req.uploaded_file_name;

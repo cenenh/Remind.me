@@ -15,10 +15,10 @@ var storage = multer.diskStorage({
     callback(null, './public/images');
   },
   filename: function(req, file, callback){
-    var timestamp =  moment().format("x");
+    var timestamp = moment().format("x");
     var extension = mime.extension(file.mimetype);
     var file_name = "img_"+ req.user.email + "_" + timestamp + "." + extension;
-    console.log(file_name);
+    //console.log(file_name);
     req.uploaded_file_name = file_name; //save url in database;
     callback(null, file_name);
   }

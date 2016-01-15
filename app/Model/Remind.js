@@ -130,7 +130,7 @@ Remind.prototype.getRemindWithPlaces = function(callback){
       });
     },
     function(connection, callback){
-      var sql = 'SELECT company,category,img_link,detail_info,date FROM remind_list where email = ? and remind_alarm = true';
+      var sql = 'SELECT * FROM remind_list where email = ? and remind_alarm = true';
       connection.query(sql, data.email, function(query_error, query_result){
         connection.release();
         callback(JSON.parse(JSON.stringify(query_error)), query_result);

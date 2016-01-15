@@ -17,7 +17,7 @@ module.exports.addRemind = function (req, res){
     detail_info: req.body.detail_info,
     date: moment().format('LLLL')
   };
-
+  
   if(req.uploaded_file_name){
     var img_link = server_config.img_link + req.uploaded_file_name;
     params.img_link = img_link;

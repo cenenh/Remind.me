@@ -1,20 +1,21 @@
 /**
  * Created by eunho on 2015-12-05.
  */
- var Remind = require('../Model/Remind');
- var moment = require('moment');
- var server_config = require('../../config/server');
- var multer = require('multer');
- var category_config = require('../../config/category');
+var Remind = require('../Model/Remind');
+var moment = require('moment');
+var server_config = require('../../config/server');
+var multer = require('multer');
+var category_config = require('../../config/category');
+var urlencode = require('urlencode');
 
 //POST
 module.exports.addRemind = function (req, res){
   var response = {};
   var params = {
     email: req.user.email,
-    company: req.body.company,
-    category: req.body.category,
-    detail_info: req.body.detail_info,
+    company: urlencode.decode(req.body.company),
+    category: urlencode.decode(req.body.category),
+    detail_info: urlencode.decode(req.body.detail_info),
     date: moment().format('LLLL')
   };
 

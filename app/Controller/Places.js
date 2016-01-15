@@ -50,6 +50,7 @@ module.exports.search = function(req, res){
             place_id : googlePlace.place_id,
             address: googlePlace.vicinity,
             location: googlePlace.geometry.location,
+            img_link: remind.img_link,
             todo: remind.detail_info,
             add_remind_date: remind.date
           });
@@ -66,55 +67,3 @@ module.exports.search = function(req, res){
     delete req.reminds;
   });
 }
-
-/*module.exports.nearbysearch = function(req, res){
-  var url = googleMap.url;
-  var response = [];
-  var params = {
-    email: req.user.email,
-    location: req.body.lat + ',' + req.body.lng
-  };
-  var places = new Places(params);
-
-  async.waterfall([
-    function(callback){
-      var remindDAO = new Remind(params);
-
-      remindDAO.getRemindWithPlaces(function(err, reminds){
-        if(!err){
-          callback(null, reminds);
-        }
-      });
-    },
-    function(reminds, callback){
-      async.eachSeries(reminds, function(remind, callback){
-        var qs = {};
-        _.extend(qs, googleMap.params);
-        qs.location = params.location;
-        qs.name = remind.company || remind.category;
-
-        places.getPlacesFromGoogle(url, qs, function(err, googlePlaces){
-          async.eachSeries(googlePlaces.results, function(googlePlace, callback){
-            response.push({
-              name: googlePlace.name,
-              id: googlePlace.id,
-              place_id : googlePlace.place_id,
-              address: googlePlace.vicinity,
-              location: googlePlace.location,
-              todo: remind.detail_info
-            });
-            callback(); //googleplace ++;
-          }); // async.eachSeries
-        });//Places.getPaclesFromGoogle
-        callback(); //remind++
-      }, function(err, result){
-        callback(null, result);
-      }); //async.eachSeries
-    }
-  ], function(err, result){
-    res.json({
-      code: 200,
-      results: response
-    });
-  });
-}*/

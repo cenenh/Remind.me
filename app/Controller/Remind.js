@@ -13,12 +13,18 @@ module.exports.addRemind = function (req, res){
   var response = {};
   var params = {
     email: req.user.email,
-    company: urlencode.decode(req.body.company),
-    category: urlencode.decode(req.body.category),
     detail_info: urlencode.decode(req.body.detail_info),
     date: moment().format('LLLL')
   };
   
+  if(req.body.company){
+    params.company = urlencode.decode(req.body.company);
+  }
+  if(req.body.category){
+    params.category = urlencode.decode(req.body.category);
+  }
+
+>>>>>>> 64ce5784199b0f56c4d721719c453f8d790fe244
   if(req.uploaded_file_name){
     var img_link = server_config.img_link + req.uploaded_file_name;
     params.img_link = img_link;
@@ -27,6 +33,7 @@ module.exports.addRemind = function (req, res){
   var remindDAO = new Remind(params);
   remindDAO.addRemind(function(error, result){
     if(error){
+	  console.log(error);
       response.code = 400;
       response.data = "addRemind FAIL";
     }

@@ -24,7 +24,6 @@ module.exports.addRemind = function (req, res){
     params.category = urlencode.decode(req.body.category);
   }
 
->>>>>>> 64ce5784199b0f56c4d721719c453f8d790fe244
   if(req.uploaded_file_name){
     var img_link = server_config.img_link + req.uploaded_file_name;
     params.img_link = img_link;

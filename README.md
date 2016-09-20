@@ -248,7 +248,7 @@ Response:
       Response Data:
          1) { "code": int, "latitude": double, "longtitude": double }
       Response Data Example:
-         1) { "code": 200, "latitude": "37.5533", "longtitude": "126.974" }
+         1) { "code": 200, "latitude": 37.5533, "longtitude": 126.974 }
 ```
 #### 정규 테스트용 참고이미지
 ![kakaotalk_20160112_235637679](https://cloud.githubusercontent.com/assets/9075767/12266801/72607534-b988-11e5-8937-3594cf7c5242.png)
